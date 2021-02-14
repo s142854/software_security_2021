@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>instructies.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<!-- 
+DISCLAIMER:
+
+!!!!
+
+GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
+
+!!!!
+-->
+<style>
+.holder_default {
+    width:500px; 
+    height:150px; 
+    border: 3px dashed #ccc;
+}
+
+.hover { 
+    width:400px; 
+    height:150px; 
+    border: 3px dashed #0c0 !important; 
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+</style>
+<script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<div id="alles">
+<h1 id="introductie">Introductie</h1>
+<p>In deze labo sessie kruipen we weer in de rol van white hat hacker die de Juice Shop die jullie vorige les hebben  geïnstalleerd. Deze keer gaan we aan de hand van de tool BurpSuite het paswoord van de administrator brute force te hacken.</p>
+<h3 id="wat-ga-je-leren-in-dit-labo">Wat ga je leren in dit labo?</h3>
+<ul>
+<li>Installeren van BurpSuite.</li>
+<li>Brute force hacken van een paswoord.</li>
+</ul>
+<h3 id="stappenplan">Stappenplan</h3>
+<ol>
+<li>
+<p>Open de registratie pagina van de juice shop web applicatie</p>
+</li>
+<li>
+<p>Zijn alle paswoorden die je hier kan ingeven 'sterke paswoorden'? Zo niet, wat is er mis?</p>
+ <textarea style="width: 100%;" rows="4">
+ </textarea>
+ <details>
+ <summary>Eerste tip</summary>
+<p>Kijk op het hoofdstuk over <a href="https://app.gitbook.com/@apwt/s/g-pro-software-security/les-1-introductie/authenticatie-guidelines">paswoorden</a>.</p>
+ </details>
+</li>
+<li>
+<p>Open je browser en ga naar de volgende website</p>
+<p><a href="https://portswigger.net/burp/releases/professional-community-2021-2?requestededition=community" target="_blank">BurpSuite</a></p>
+<p>en download de Community Edition van BurpSuite voor jouw platform.</p>
+</li>
+<li>
+<p>Bekijk het filmpje over het installeren en de werking van BurpSuite proxy.</p>
+ <iframe src="https://ap.cloud.panopto.eu/Panopto/Pages/Embed.aspx?id=2aa79c25-52e0-4b17-b3fa-accd00e3b198&autoplay=false&offerviewer=true&showtitle=true&showbrand=false&start=0&interactivity=all" height="405" width="720" style="border: 1px solid #464646;" allowfullscreen></iframe>
+</li>
+<li>
+<p>Vooraleer we kunnen beginnen met het kraken van het admin paswoord, moeten we op zoek gaan naar het email adres van de administrator.</p>
+ <details>
+ <summary>Eerste tip</summary>
+<p>De email adressen van de gebruikers kan je gewoon uitlezen in de reviews van producten.</p>
+ </details>
+</li>
+<li>
+<p>We gaan uiteraard niet zelf alle mogelijkheden proberen. We gaan hier gebruik maken van een paswoord list. Ga naar de website</p>
+<p>https://github.com/danielmiessler/SecLists/tree/master/Passwords/Common-Credentials</p>
+<p>Dit is een grote collectie aan text bestanden die allemaal onveilige paswoorden bevatten. Voor deze beperkte opgave hoef je alleen <code>best1050.txt</code> te downloaden.</p>
+</li>
+<li>
+<p>Start Burp Suite op en gebruik de proxy om de request op te vangen waarmee je probeert mee in te loggen (Zie filmpje hierboven).</p>
+<p>Neem een screenshot van deze request en sleep deze hier onder in:</p>
+ <div id="holder" style="" class="holder_default">
+       <img src="" id="holder_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+ </div>
+ <script>
+     $(document).ready(function() {
+         addDrop('holder')
+     });
+ </script>
+</li>
+<li>
+<p>Gebruik deze request in de Intruder tool door op actions te klikken en vervolgens op 'send to intruder' te klikken. Ga vervolgens naar de intruder tab.</p>
+</li>
+<li>
+<p>Zorg ervoor dat alleen het paswoord variabel is.</p>
+ <details>
+ <summary>Eerste tip</summary>
+<p>Zorg ervoor dat er alleen bij het paswoord een § symbool staat.</p>
+ </details>
+</li>
+<li>
+<p>Ga naar de payloads tab en zorg ervoor dat je de file <code>best1050.txt</code> gebruikt als paswoord lijst.</p>
+</li>
+<li>
+<p>Start de aanval en maak een screenshot als het paswoord gevonden is.</p>
+<p>Sleep de screenshot hier onder in:</p>
+ <div id="holder1" style="" class="holder_default">
+       <img src="" id="holder1_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+ </div>
+ <script>
+     $(document).ready(function() {
+         addDrop('holder1')
+     });
+ </script>
+<p><strong>Opmerking:</strong> Na maximum 200 pogingen zou het paswoord gevonden moeten zijn. Duurt dit langer, dan ben je op het foute spoor.</p>
+</li>
+<li>
+<p>Vindt je dit een goed paswoord? Waarom wel/niet?</p>
+ <textarea style="width: 100%;" rows="4">
+ </textarea>
+</li>
+<li>
+<p>Spoor net zoals in vorig labo de 'administration' pagina op en log in met de admin email en paswoord. Neem hier een screenshot van en sleep deze hier onder in:</p>
+<div id="holder2" style="" class="holder_default">
+      <img src="" id="holder2_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+</div>
+<script>
+    $(document).ready(function() {
+        addDrop('holder2')
+    });
+</script>
+</li>
+<li>
+<p>Print deze pagina af als PDF en zend deze via digitap in.</p>
+<p><strong>Opmerking:</strong> Als dit niet lukt maak dan een zip file en stuur deze door.</p>
+</li>
+</ol>
+<script>
+function addDrop(id) {
+    var holder = document.getElementById(id);
+    holder.ondragover = function () { this.className = 'hover'; return false; };
+    holder.ondrop = function (e) {
+      this.className = 'hidden';
+      e.preventDefault();
+      var file = e.dataTransfer.files[0];
+      var reader = new FileReader();
+      reader.onload = function (event) {
+          document.getElementById(id + '_image_droped').className='visible'
+          $('#' + id + '_image_droped').attr('src', event.target.result);
+      }
+      reader.readAsDataURL(file);
+    };
+}
+</script>
+
+</body>
+</html>
