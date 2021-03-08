@@ -78,7 +78,7 @@ In dit labo gaan we dieper in op hashing van bestanden en van paswoorden
 
     ```https://github.com/similonap/software_security_2021.git```
 
-   Ga naar de directory `labo_encryptie` en voer het commando 
+   Ga naar de directory `labo_hashing` en voer het commando 
 
    ```
    npm install
@@ -174,6 +174,19 @@ In dit labo gaan we dieper in op hashing van bestanden en van paswoorden
     </script>
 
 12. Log in met deze gebruiker en verifieer of het paswoord klopt.
+
+13. **Extra uitdaging:** Bekijk de extra leerstof over hashcat op https://apwt.gitbook.io/g-pro-software-security/hashing/hashcat en probeer de md5 hash te achterhalen via hashcat. 
+
+    Neem een screenshot van je terminal met het paswoord op en sleep deze hieronder in:
+
+    <div id="holder4" style="" class="holder_default">
+          <img src="" id="holder4_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+    </div>
+    <script>
+        $(document).ready(function() {
+            addDrop('holder4')
+        });
+    </script>
 
 11. Print deze pagina af als PDF en slaag deze op als `naam_voornaam_labo_hashing.pdf`
 
