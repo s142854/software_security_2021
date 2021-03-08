@@ -1,0 +1,14 @@
+[
+    {
+        "email": "alice@bankinc.com",
+        "password": "admin123"
+    },
+    {
+        "email": "bob@bankinc.com",
+        "password": "test123"
+    },
+    {
+        "email": "cindy@bankinc.com",
+        "password": "hunter2"
+    }
+]

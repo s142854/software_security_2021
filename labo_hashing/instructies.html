@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>instructies.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<!-- 
+DISCLAIMER:
+
+!!!!
+
+GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
+
+!!!!
+-->
+<style>
+.holder_default {
+    width:500px; 
+    height:150px; 
+    border: 3px dashed #ccc;
+}
+
+.hover { 
+    width:400px; 
+    height:150px; 
+    border: 3px dashed #0c0 !important; 
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+</style>
+<script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<div id="alles">
+<h1 id="hashing">Hashing</h1>
+<p>In dit labo gaan we dieper in op hashing van bestanden en van paswoorden</p>
+<h3 id="wat-ga-je-leren-in-dit-labo">Wat ga je leren in dit labo?</h3>
+<ul>
+<li>Een hash laten berekenen van een gedownload bestand.</li>
+</ul>
+<h3 id="voorbereiding">Voorbereiding</h3>
+<ul>
+<li>
+<p>Neem de slides over hashing nog eens uitvoerig door.</p>
+</li>
+<li>
+<p>Neem de gitbook pagina over de library crypto-js door:</p>
+<p><code>https://apwt.gitbook.io/g-pro-software-security/hashing/crypto.js</code></p>
+</li>
+</ul>
+<h3 id="stappenplan">Stappenplan</h3>
+<ol>
+<li>
+<p>Je hebt in vorig labo Burpsuite gedownload. Ga naar de download pagina van burpsuite (community edition) en probeer de SHA256 checksum van dit bestand te weten te komen. Geef deze hieronder in het tekstvak in:</p>
+ <textarea style="width: 100%;" rows="1">
+ </textarea>
+</li>
+<li>
+<p>Gebruik CertUtil (of openssl) commando om de SHA256 hash te berekenen van dit bestand.</p>
+<p>Neem een screenshot van je terminal en sleep deze hieronder in:</p>
+ <div id="holder1" style="" class="holder_default">
+       <img src="" id="holder1_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+ </div>
+ <script>
+     $(document).ready(function() {
+         addDrop('holder1')
+     });
+ </script>
+</li>
+<li>
+<p>Deze SHA256 hash moet hetzelfde als die je op de website hebt gevonden. Waarom?</p>
+ <textarea style="width: 100%;" rows="4">
+ </textarea>
+</li>
+<li>
+<p>Doe een git clone van de volgende repository:</p>
+<p><code>https://github.com/similonap/software_security_2021.git</code></p>
+<p>Ga naar de directory <code>labo_encryptie</code> en voer het commando</p>
+<pre class="hljs"><code><div>npm install
+</div></code></pre>
+<p>uit.</p>
+</li>
+<li>
+<p>In dit deel van het labo zijn we aangenomen om de bank 'UNSAFE BANK INC.' te helpen met hun security problemen. Jij bent uiteraard na de cursus Software Security de aangewezen persoon om hun daarbij te helpen.</p>
+</li>
+<li>
+<p>Ze hebben ons een script aangeboden dat hun <code>users</code> databank afprint. Je kan het script laten lopen door</p>
+<pre class="hljs"><code><div>node password_db_print.js
+</div></code></pre>
+<p>uit te voeren in je terminal.</p>
+<p>Wat merk je op in verband met de paswoorden?</p>
+ <textarea style="width: 100%;" rows="4">
+ </textarea>
+</li>
+<li>
+<p>Om in te loggen hebben ze ook een script aangeboden. Je kan het laten uitvoeren door</p>
+<pre class="hljs"><code><div>node login.js
+</div></code></pre>
+<p>in de terminal uit te voeren. Log in met 1 van de users die je in de vorige stap hebt gezien.</p>
+</li>
+<li>
+<p>We moeten deze passwoorden nu <code>hashen</code> zodat deze niet meer leesbaar zijn voor hackers indien deze zouden gestolen worden.</p>
+</li>
+<li>
+<p>Ga naar het bestand <code>security.js</code> en pas de <code>hash</code> functie aan zodat deze het <code>PBKDF2</code> algoritme gebruikt om het passwoord te hashen. Zorg ervoor dat er maar 1 iteration wordt gedaan en dit de salt gebruikt die daar boven aangemaakt wordt. We willen hier de hexadecimale string representatie van.</p>
+<p><em><strong>Opgelet</strong></em>: gebruik hiervoor de <code>iterations</code> en <code>salt</code> constante die boven de functie al klaarstaat.</p>
+</li>
+<li>
+<p>Voer nu terug het</p>
+<pre class="hljs"><code><div>node password_db_print.js
+</div></code></pre>
+<p>script uit. Nu zal je zien dat de paswoorden niet meer zomaar uitleesbaar zijn.</p>
+<p>Neem hier een screenshot van:</p>
+ <div id="holder2" style="" class="holder_default">
+       <img src="" id="holder2_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+ </div>
+ <script>
+     $(document).ready(function() {
+         addDrop('holder2')
+     });
+ </script>
+</li>
+<li>
+<p>Na je wijziging klagen de klanten van de bank dat ze niet meer kunnen inloggen met het <code>login.js</code> script.</p>
+<p>Dit komt omdat het passwoord dat je ingeeft ook eerst moet gehashed worden met de <code>hash</code> functie vooraleer je die aan de <code>login</code> functie moet meegeven. Pas het <code>login.js</code> bestand aan zodat je terug kan inloggen.</p>
+</li>
+<li>
+<p>Je hebt al opgemerkt dat er in de output vaak:</p>
+<p><code>[DEBUG] hash(admin123) took 1 ms</code></p>
+<p>stond. Dit is omdat we ook de snelheid van het hashing algoritme willen testen. Met 1 iteratie ging dit heel snel. Veel te snel! Dit betekent dat een hacker dit zelf ook heel snel kan berekenen. Hij moet dit natuurlijk wel voor alle combinaties testen.</p>
+<p>De bank wil dat jij het aantal iteraties van het hashing algoritme verhoogt zodat dit gemiddeld gezien ongeveer 200ms zal duren om een hash te berekenen.</p>
+<p>Test de snelheid van je hashing functie door</p>
+<pre class="hljs"><code><div>node hashing_speed_test.js
+</div></code></pre>
+<p>uit te voeren. Indien het niet rond 200ms ligt, pas je het aantal iterations in <code>security.js</code> aan en herhaal je de stap.</p>
+</li>
+<li>
+<p>We gaan nu weer even terug naar de juice shop. We hebben via een andere hacker een gehashed paswoord te pakken gekregen van de gebruiker admin@juice-sh.op:</p>
+<p><code>0192023a7bbd73250516f069df18b500</code></p>
+<p>gebruik nu de website</p>
+<p><code>https://www.nitrxgen.net/md5db/</code></p>
+<p>om het originele paswoord te bepalen.</p>
+<p>Neem een screenshot van je browser en sleep deze hieronder in:</p>
+<div id="holder3" style="" class="holder_default">
+      <img src="" id="holder3_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+</div>
+<script>
+    $(document).ready(function() {
+        addDrop('holder3')
+    });
+</script>
+</li>
+<li>
+<p>Log in met deze gebruiker en verifieer of het paswoord klopt.</p>
+</li>
+<li>
+<p>Print deze pagina af als PDF en slaag deze op als <code>naam_voornaam_labo_hashing.pdf</code></p>
+<p>Zip alle bestanden die je in dit labo hebt aangemaakt en stuur deze in via digitap. Deze bestanden zijn:</p>
+<ul>
+<li>security.js</li>
+<li>login.js</li>
+<li>naam_voornaam_labo_hashing.pdf</li>
+</ul>
+</li>
+</ol>
+<script>
+function addDrop(id) {
+    var holder = document.getElementById(id);
+    holder.ondragover = function () { this.className = 'hover'; return false; };
+    holder.ondrop = function (e) {
+      this.className = 'hidden';
+      e.preventDefault();
+      var file = e.dataTransfer.files[0];
+      var reader = new FileReader();
+      reader.onload = function (event) {
+          document.getElementById(id + '_image_droped').className='visible'
+          $('#' + id + '_image_droped').attr('src', event.target.result);
+      }
+      reader.readAsDataURL(file);
+    };
+}
+</script>
+
+</body>
+</html>
