@@ -40,6 +40,8 @@ In dit labo gaan we dieper in op hashing van bestanden en van paswoorden
 
 ### Wat ga je leren in dit labo?
 - Een hash laten berekenen van een gedownload bestand.
+- Gebruik maken van de cryptojs library voor het hashen van paswoorden.
+- Het nut van iterations en salt leren.
 
 ### Voorbereiding
 - Neem de slides over hashing nog eens uitvoerig door.
