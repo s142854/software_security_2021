@@ -175,7 +175,7 @@ In dit labo gaan we dieper in op hashing van bestanden en van paswoorden
 
 12. Log in met deze gebruiker en verifieer of het paswoord klopt.
 
-13. **Extra uitdaging:** Bekijk de extra leerstof over hashcat op https://apwt.gitbook.io/g-pro-software-security/hashing/hashcat en probeer de md5 hash te achterhalen via hashcat. 
+13. **Extra:** Bekijk de extra leerstof over hashcat op <a target="_blank" href="https://apwt.gitbook.io/g-pro-software-security/hashing/hashcat">gitbook</a> en probeer de md5 hash te achterhalen via hashcat. 
 
     Neem een screenshot van je terminal met het paswoord op en sleep deze hieronder in:
 
