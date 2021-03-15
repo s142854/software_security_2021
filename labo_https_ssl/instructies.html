@@ -482,6 +482,7 @@ Common Name (eg, fully qualified host name) []:localhost
 <p>Klik op Advanced (Geavanceerd) en dan krijg klapt het open en dan klik je op &quot;Proceed to localhost(unsafe)&quot;</p>
  <img src="http_warning_2.png" width="400">
 <p>dan krijg je gewoon de website te zien zoals bij de http versie.</p>
+<p><strong>Opgelet</strong>: als je niet de optie krijgt om verder te gaan. Typ dan <code>chrome://flags/#allow-insecure-localhost</code> in je browser en zet deze op Enabled.</p>
 </li>
 <li>
 <p>Laat zien dat deze verbinding niet secure is aan de hand van de adresbalk.</p>
@@ -496,16 +497,18 @@ Common Name (eg, fully qualified host name) []:localhost
  </script>    
 </li>
 <li>
-<p>Zoek het &quot;Certification Path&quot; van deze self signed certificate.</p>
+<p><strong>Windows only:</strong> Zoek het &quot;Certification Path&quot; van deze self signed certificate.</p>
  <details>
  <summary>Eerste tip</summary>
-<p>Klik op het uitroeptekentje in de adresbalk om zo informatie over het certificaat te verkrijgen.</p>
- </details>
 </li>
 <li>
+<p><strong>Windows only:</strong>  Klik op het uitroeptekentje in de adresbalk om zo informatie over het certificaat te verkrijgen.</p>
+</details>
 <p>Onderaan in dit venster geeft hij aan wat de reden is waarom het certificaat niet betrouwbaar is. Kopieer deze reden in het tekstvak:</p>
 <textarea style="width: 100%;" rows="3">
 </textarea>
+</li>
+<li>
 <p>Leg nu in je eigen woorden uit waarom het certificaat niet betrouwbaar is:</p>
 <textarea style="width: 100%;" rows="5">
 </textarea>
@@ -541,7 +544,11 @@ Common Name (eg, fully qualified host name) []:localhost
 <p>te veranderen in <code>http.js</code></p>
 </li>
 <li>
+<p>Ga naar terug naar de https website en open de chrome developer tools (CTRL-SHIFT-J) en ga vervolgens naar de security tab. Hier kan je allerlei informatie over de security zien van deze pagina.</p>
 <p>Ondersteunt jouw browser deze versie van TLS?</p>
+<textarea style="width: 100%;" rows="2">
+</textarea>
+<p>Vanaf welke versie dan wel?</p>
 <textarea style="width: 100%;" rows="2">
 </textarea>
 </li>
@@ -560,7 +567,7 @@ Common Name (eg, fully qualified host name) []:localhost
 </script>
 </li>
 <li>
-<p>Zet nu de versie van TLS terug naar de originele waarde.</p>
+<p>Zet nu de versie van TLS op 1.2 in de <strong>http.js</strong> file (TLSv1_2_method)</p>
 </li>
 <li>
 <p><strong>Extra:</strong> Zorg ervoor dat het het certificaat in je trusted root certfication authorities van je operating system komt te staan.</p>
@@ -584,6 +591,7 @@ Common Name (eg, fully qualified host name) []:localhost
 <p>Zip alle bestanden die je in dit labo hebt aangemaakt en stuur deze in via digitap. Deze bestanden zijn:</p>
 <ul>
 <li>naam_voornaam_labo_https_ssl.pdf</li>
+<li>http.js</li>
 </ul>
 </li>
 </ol>

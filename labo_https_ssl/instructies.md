@@ -136,6 +136,8 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
 
     dan krijg je gewoon de website te zien zoals bij de http versie.
 
+    **Opgelet**: als je niet de optie krijgt om verder te gaan. Typ dan ```chrome://flags/#allow-insecure-localhost``` in je browser en zet deze op Enabled. 
+
 4. Laat zien dat deze verbinding niet secure is aan de hand van de adresbalk. 
 
     Neem hier een screenshot van en sleep deze hieronder in:
@@ -149,21 +151,21 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
         });
     </script>    
 
-9. Zoek het "Certification Path" van deze self signed certificate. 
+9. **Windows only:** Zoek het "Certification Path" van deze self signed certificate. 
 
     <details>
     <summary>Eerste tip</summary>
     
-    Klik op het uitroeptekentje in de adresbalk om zo informatie over het certificaat te verkrijgen.
+10. **Windows only:**  Klik op het uitroeptekentje in de adresbalk om zo informatie over het certificaat te verkrijgen.
     
     </details>
 
-10. Onderaan in dit venster geeft hij aan wat de reden is waarom het certificaat niet betrouwbaar is. Kopieer deze reden in het tekstvak:
+    Onderaan in dit venster geeft hij aan wat de reden is waarom het certificaat niet betrouwbaar is. Kopieer deze reden in het tekstvak:
 
     <textarea style="width: 100%;" rows="3">
     </textarea>
 
-    Leg nu in je eigen woorden uit waarom het certificaat niet betrouwbaar is:
+11. Leg nu in je eigen woorden uit waarom het certificaat niet betrouwbaar is:
 
     <textarea style="width: 100%;" rows="5">
     </textarea>
@@ -209,7 +211,14 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
 
     te veranderen in `http.js`
 
-16. Ondersteunt jouw browser deze versie van TLS?
+16. Ga naar terug naar de https website en open de chrome developer tools (CTRL-SHIFT-J) en ga vervolgens naar de security tab. Hier kan je allerlei informatie over de security zien van deze pagina.
+
+    Ondersteunt jouw browser deze versie van TLS?
+
+    <textarea style="width: 100%;" rows="2">
+    </textarea>
+
+    Vanaf welke versie dan wel?
 
     <textarea style="width: 100%;" rows="2">
     </textarea>
@@ -231,7 +240,7 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
         });
     </script>
 
-17. Zet nu de versie van TLS terug naar de originele waarde.
+17. Zet nu de versie van TLS op 1.2 in de **http.js** file (TLSv1_2_method)
 
 16. **Extra:** Zorg ervoor dat het het certificaat in je trusted root certfication authorities van je operating system komt te staan.
 
@@ -260,6 +269,7 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
 
     Zip alle bestanden die je in dit labo hebt aangemaakt en stuur deze in via digitap. Deze bestanden zijn:
     - naam_voornaam_labo_https_ssl.pdf
+    - http.js
 
 <script>
 function addDrop(id) {
