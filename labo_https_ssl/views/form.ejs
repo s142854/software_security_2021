@@ -1,0 +1,23 @@
+<script>
+  function fill() {
+      var login = atob('YWRtaW5AZ29vZ2xlLmNvbQ==');
+      var password = atob('YWRtaW4xMjM=');
+      document.getElementById('username').value = login;
+      document.getElementById('password').value = password;
+      return false;
+  }
+</script>
+
+
+<%= message %>
+<div class="log-form">
+    <h2>Login to your account</h2>
+    <form method="<%= formMethod %>">
+      <input id="username" name="username" type="text" title="username" placeholder="username" />
+      <input id="password" name="password" type="password" title="username" placeholder="password" />
+      <button type="submit" class="btn">Login</button>
+      <% if (formMethod === 'POST') { %>
+      <button class="btn" onclick="fill(); event.preventDefault();">Prefill Correct Info</button>
+      <% } %>
+    </form>
+</div>
