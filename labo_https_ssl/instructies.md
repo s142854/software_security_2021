@@ -138,6 +138,11 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
 
     **Opgelet**: als je niet de optie krijgt om verder te gaan. Typ dan ```chrome://flags/#allow-insecure-localhost``` in je browser en zet deze op Enabled. 
 
+4. Waarom waarschuwt je browser je hier over? Waarom is dit onveilig?
+
+    <textarea style="width: 100%;" rows="5">
+    </textarea>
+
 4. Laat zien dat deze verbinding niet secure is aan de hand van de adresbalk. 
 
     Neem hier een screenshot van en sleep deze hieronder in:
@@ -150,25 +155,6 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
             addDrop('holder1')
         });
     </script>    
-
-9. **Windows only:** Zoek het "Certification Path" van deze self signed certificate. 
-
-    <details>
-    <summary>Eerste tip</summary>
-    
-10. **Windows only:**  Klik op het uitroeptekentje in de adresbalk om zo informatie over het certificaat te verkrijgen.
-    
-    </details>
-
-    Onderaan in dit venster geeft hij aan wat de reden is waarom het certificaat niet betrouwbaar is. Kopieer deze reden in het tekstvak:
-
-    <textarea style="width: 100%;" rows="3">
-    </textarea>
-
-11. Leg nu in je eigen woorden uit waarom het certificaat niet betrouwbaar is:
-
-    <textarea style="width: 100%;" rows="5">
-    </textarea>
 
 12. Bepaal de SSL/TLS capabilities van jouw browser aan de hand van de website 
 
@@ -242,12 +228,27 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
 
 17. Zet nu de versie van TLS op 1.2 in de **http.js** file (TLSv1_2_method)
 
-16. **Extra:** Zorg ervoor dat het het certificaat in je trusted root certfication authorities van je operating system komt te staan.
+16. Zorg ervoor dat het het certificaat in je trusted root certfication authorities van je operating system komt te staan.
 
-    Windows: <a target="_blank" href="https://support.kaspersky.com/CyberTrace/1.0/en-US/174127.htm">https://support.kaspersky.com/CyberTrace/1.0/en-US/174127.htm</a>
+    Windows: 
+    
+    - Open de Microsoft Management Console (Windows key-R en dan mmc intypen)
+    - Add remove snap-in
+    - Voeg de certificate snap-in toe
+    - Kies computer account (Next)
+    - Klik op finish
+    - Ga naar Trusted Root Certification Authorities/Certificates
+    - Klik op Actions -> All Tasks -> Import
+    - Importeer jouw cert.pem (altijd next klikken)
 
-    Mac Os: <a target="_blank" href="https://www.eduhk.hk/ocio/content/faq-how-add-root-certificate-mac-os-x">https://www.eduhk.hk/ocio/content/faq-how-add-root-certificate-mac-os-x</a>
 
+    Mac Os: 
+    - Dubbelklik op het `cert.pem` bestand
+    - Kies keychain 'system'
+    - Dubbelklik op 'localhost' die net is toegevoegd
+    - Kijk zeker na of het jouw certificaat is!
+    - Klik op trust en kies Always Trust bij SSL
+    
     Sluit chrome volledig en ga terug naar
 
     ```

@@ -485,6 +485,11 @@ Common Name (eg, fully qualified host name) []:localhost
 <p><strong>Opgelet</strong>: als je niet de optie krijgt om verder te gaan. Typ dan <code>chrome://flags/#allow-insecure-localhost</code> in je browser en zet deze op Enabled.</p>
 </li>
 <li>
+<p>Waarom waarschuwt je browser je hier over? Waarom is dit onveilig?</p>
+ <textarea style="width: 100%;" rows="5">
+ </textarea>
+</li>
+<li>
 <p>Laat zien dat deze verbinding niet secure is aan de hand van de adresbalk.</p>
 <p>Neem hier een screenshot van en sleep deze hieronder in:</p>
  <div id="holder1" style="" class="holder_default">
@@ -495,23 +500,6 @@ Common Name (eg, fully qualified host name) []:localhost
          addDrop('holder1')
      });
  </script>    
-</li>
-<li>
-<p><strong>Windows only:</strong> Zoek het &quot;Certification Path&quot; van deze self signed certificate.</p>
- <details>
- <summary>Eerste tip</summary>
-</li>
-<li>
-<p><strong>Windows only:</strong>  Klik op het uitroeptekentje in de adresbalk om zo informatie over het certificaat te verkrijgen.</p>
-</details>
-<p>Onderaan in dit venster geeft hij aan wat de reden is waarom het certificaat niet betrouwbaar is. Kopieer deze reden in het tekstvak:</p>
-<textarea style="width: 100%;" rows="3">
-</textarea>
-</li>
-<li>
-<p>Leg nu in je eigen woorden uit waarom het certificaat niet betrouwbaar is:</p>
-<textarea style="width: 100%;" rows="5">
-</textarea>
 </li>
 <li>
 <p>Bepaal de SSL/TLS capabilities van jouw browser aan de hand van de website</p>
@@ -570,9 +558,26 @@ Common Name (eg, fully qualified host name) []:localhost
 <p>Zet nu de versie van TLS op 1.2 in de <strong>http.js</strong> file (TLSv1_2_method)</p>
 </li>
 <li>
-<p><strong>Extra:</strong> Zorg ervoor dat het het certificaat in je trusted root certfication authorities van je operating system komt te staan.</p>
-<p>Windows: <a target="_blank" href="https://support.kaspersky.com/CyberTrace/1.0/en-US/174127.htm">https://support.kaspersky.com/CyberTrace/1.0/en-US/174127.htm</a></p>
-<p>Mac Os: <a target="_blank" href="https://www.eduhk.hk/ocio/content/faq-how-add-root-certificate-mac-os-x">https://www.eduhk.hk/ocio/content/faq-how-add-root-certificate-mac-os-x</a></p>
+<p>Zorg ervoor dat het het certificaat in je trusted root certfication authorities van je operating system komt te staan.</p>
+<p>Windows:</p>
+<ul>
+<li>Open de Microsoft Management Console (Windows key-R en dan mmc intypen)</li>
+<li>Add remove snap-in</li>
+<li>Voeg de certificate snap-in toe</li>
+<li>Kies computer account (Next)</li>
+<li>Klik op finish</li>
+<li>Ga naar Trusted Root Certification Authorities/Certificates</li>
+<li>Klik op Actions -&gt; All Tasks -&gt; Import</li>
+<li>Importeer jouw cert.pem (altijd next klikken)</li>
+</ul>
+<p>Mac Os:</p>
+<ul>
+<li>Dubbelklik op het <code>cert.pem</code> bestand</li>
+<li>Kies keychain 'system'</li>
+<li>Dubbelklik op 'localhost' die net is toegevoegd</li>
+<li>Kijk zeker na of het jouw certificaat is!</li>
+<li>Klik op trust en kies Always Trust bij SSL</li>
+</ul>
 <p>Sluit chrome volledig en ga terug naar</p>
 <pre class="hljs"><code><div>https://localhost:3001
 </div></code></pre>
