@@ -2,9 +2,10 @@ const express = require('express');
 const https = require('https');
 const http = require('http');
 const fs = require('fs');
-
 const app = express();
 const bodyParser = require('body-parser');
+const { constants } = require('crypto')
+
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.set('view engine', 'ejs');
@@ -12,6 +13,7 @@ app.set('view engine', 'ejs');
 let options = null;
 try {
     options = {
+        secureProtocol  : 'TLS_method',
         key: fs.readFileSync('key.pem'),
         cert: fs.readFileSync('cert.pem'),
     };
