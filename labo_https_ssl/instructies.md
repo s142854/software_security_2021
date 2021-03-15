@@ -34,14 +34,12 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
 
 <div id="alles">
 
-# Encryptie HTTPS/SSL
+# HTTPS/SSL
 
 ## HTTP/HTTPS
 ### Wat ga je leren in dit labo?
 - Een self signed certificate aanmaken met openssl.
-- Wireshark installeren en gebruiken.
-- Wireshark gebruiken om paketten te sniffen verstuurd via onbeveiligde http.
-- Het verschil begrijpen tussen http en https.
+- Testen met Open SSL
 ### Stappenplan
 
 1. We raden je aan om google chrome te gebruiken voor dit labo. Wens je dat niet te doen zal je voor sommige settings zelf op zoek moeten gaan.
@@ -80,19 +78,6 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
 
     Dit komt omdat we nog geen certificaat hebben aangemaakt voor onze webserver.
 
-4. Laat zien dat deze verbinding niet secure is aan de hand van de adresbalk. 
-
-    Neem hier een screenshot van en sleep deze hieronder in:
-
-    <div id="holder1" style="" class="holder_default">
-          <img src="" id="holder1_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
-    </div>
-    <script>
-        $(document).ready(function() {
-            addDrop('holder1')
-        });
-    </script>
-
 4. Sluit de webserver terug af door CTRL-C te drukken in je terminal venster.
 
 5. Om de webserver correct te laten opstarten moeten we met openssl een self signed certificaat maken. Normaal gezien worden certificaten afgeleverd door een certificate authority. Dit is is een organisatie die digitale certificaten aan personen of bedrijven verleent na hun identiteit gecontroleerd te hebben. Dit kost meestal geld dus we gaan natuurlijk in deze cursus dit niet doen. Wij gaan gewoon zelf ons eigen certificaat signen en daar mee werken. 
@@ -100,7 +85,11 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
 6. Voer in dezelfde directory als hiervoor het volgende commando uit:
 
     ```
-    openssl req -x509 -sha256 -nodes -newkey rsa:2048 -keyout key.pem -out cert.pem -addext "subjectAltName = DNS:localhost"
+    openssl genrsa -out key.pem 4096
+
+    openssl req -new -sha256 -out private.csr -key key.pem -config ssl.conf 
+
+    openssl x509 -req -days 3650 -in private.csr -signkey key.pem -out cert.pem -extensions req_ext -extfile ssl.conf
     ```
 
     Je krijgt hier een aantal vragen met informatie die in het certificaat zullen opgeslagen worden ter identificatie:
@@ -111,13 +100,29 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
     Locality Name (eg, city) []:Antwerpen
     Organization Name (eg, company) []:AP
     Organizational Unit Name (eg, section) []:Software Security
-    Common Name (eg, fully qualified host name) []:localhost.localdomain
-    Email Address []:voornaam.achternaam@ap.be
+    Common Name (eg, fully qualified host name) []:localhost
     ```
 
     Dit zal twee bestanden aanmaken key.pem en cert.pem. Het eerste bestand is je private sleutel waarmee je je certificaat mee gesigned hebt. En het tweede bestand is het certificaat zelf. 
 
     **Merk op:** Als je het bestand key.pem opendoet merk je op dat dit heel hard trekt op de private sleutel uit het vorige labo over encryptie.
+
+6. Je kan de inhoud van een certificaat op de volgende manier in textvorm bekijken:
+
+    ```
+    openssl x509 -in cert.pem -text
+    ```
+
+    Neem een screenshot zodat de ```Subject``` uit de output duidelijk zichtbaar is en sleep deze hieronder in:
+
+    <div id="holder2" style="" class="holder_default">
+          <img src="" id="holder2_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+    </div>
+    <script>
+        $(document).ready(function() {
+            addDrop('holder2')
+        });
+    </script>
 
 7. Als je nu de webserver terug opstart met ```node http.js``` dan zal je niet meer dezelfde fout krijgen bij het opstarten. 
 
@@ -130,6 +135,19 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
     <img src="http_warning_2.png" width="400">
 
     dan krijg je gewoon de website te zien zoals bij de http versie.
+
+4. Laat zien dat deze verbinding niet secure is aan de hand van de adresbalk. 
+
+    Neem hier een screenshot van en sleep deze hieronder in:
+
+    <div id="holder1" style="" class="holder_default">
+          <img src="" id="holder1_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+    </div>
+    <script>
+        $(document).ready(function() {
+            addDrop('holder1')
+        });
+    </script>    
 
 9. Zoek het "Certification Path" van deze self signed certificate. 
 
@@ -154,7 +172,7 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
 
     <a href="https://clienttest.ssllabs.com/">https://clienttest.ssllabs.com/</a>
 
-    Voor welke versie van SSL/TLS heeft jouw browser support?
+    Voor welke versie(s) van SSL/TLS heeft jouw browser support?
 
     <textarea style="width: 100%;" rows="3">
     </textarea>
@@ -170,7 +188,7 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
     openssl s_client -connect localhost:3001
     ```
 
-14. Welk TLS protocol ondersteunt onze eigen gemaakte server?
+14. Welk TLS protocol ondersteunt onze eigen gemaakte server? (Zie naar de output van vorig commando)
 
     <textarea style="width: 100%;" rows="2">
     </textarea>
@@ -189,7 +207,9 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
     secureProtocol  : 'TLSv1_method',
     ```
 
-16. Ondersteunt jouw browser deze versie van TLS? (zie stap 12)
+    te veranderen in `http.js`
+
+16. Ondersteunt jouw browser deze versie van TLS?
 
     <textarea style="width: 100%;" rows="2">
     </textarea>
@@ -200,19 +220,24 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
     openssl s_client -connect localhost:3001 -tls1_3
     ```
 
-    Wat is de output van het commando:
+    Neem een screenshot waar de output duidelijk te zien is en sleep deze hieronder in:
 
-    <textarea style="width: 100%;" rows="10">
-    </textarea>
+    <div id="holder4" style="" class="holder_default">
+          <img src="" id="holder4_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+    </div>
+    <script>
+        $(document).ready(function() {
+            addDrop('holder4')
+        });
+    </script>
 
 17. Zet nu de versie van TLS terug naar de originele waarde.
 
 16. **Extra:** Zorg ervoor dat het het certificaat in je trusted root certfication authorities van je operating system komt te staan.
 
-    Windows: https://support.kaspersky.com/CyberTrace/1.0/en-US/
-    174127.htm
+    Windows: <a target="_blank" href="https://support.kaspersky.com/CyberTrace/1.0/en-US/174127.htm">https://support.kaspersky.com/CyberTrace/1.0/en-US/174127.htm</a>
 
-    Mac Os: https://www.eduhk.hk/ocio/content/faq-how-add-root-certificate-mac-os-x
+    Mac Os: <a target="_blank" href="https://www.eduhk.hk/ocio/content/faq-how-add-root-certificate-mac-os-x">https://www.eduhk.hk/ocio/content/faq-how-add-root-certificate-mac-os-x</a>
 
     Sluit chrome volledig en ga terug naar
 
