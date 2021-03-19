@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>instructies.md</title>
+<title>instructies_2.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -397,200 +397,169 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
 </style>
 <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 <div id="alles">
-<h1 id="httpsssl">HTTPS/SSL</h1>
-<h2 id="httphttps">HTTP/HTTPS</h2>
+<h1 id="httpsssl-2">HTTPS/SSL 2</h1>
+<h2 id="httphttps-2">HTTP/HTTPS 2</h2>
 <h3 id="wat-ga-je-leren-in-dit-labo">Wat ga je leren in dit labo?</h3>
 <ul>
-<li>Een self signed certificate aanmaken met openssl.</li>
-<li>Testen met Open SSL</li>
+<li>Wireshark installeren en gebruiken.</li>
+<li>Wireshark gebruiken om paketten te sniffen verstuurd via onbeveiligde http.</li>
+<li>Het verschil begrijpen tussen http en https.</li>
 </ul>
 <h3 id="stappenplan">Stappenplan</h3>
 <ol>
 <li>
-<p>We raden je aan om google chrome te gebruiken voor dit labo. Wens je dat niet te doen zal je voor sommige settings zelf op zoek moeten gaan.</p>
+<p>We gaan verder op het vorige labo van https/ssl. Hier hebben we een webserver opgezet met https dat gebruik maakt van een self signed certificate. Zorg ervoor dat alle stappen van het vorige labo zijn uitgevoerd.</p>
 </li>
 <li>
-<p>Doe een git clone van de volgende repository (of git pull indien je deze repo al hebt)</p>
-<p><code>https://github.com/similonap/software_security_2021.git</code></p>
+<p>Pas http.js aan zodat we terug TLS 1.3 gebruiken.</p>
+<p><code>secureProtocol  : 'TLS_method'</code></p>
 </li>
 <li>
-<p>Open de terminal in <code>labo_https_ssl</code> via visual studio code en installeer alle npm dependencies met</p>
-<pre class="hljs"><code><div>npm install
-</div></code></pre>
-</li>
-<li>
-<p>We hebben voor deze oefening een webserver in node js geschreven. Je kan deze opstarten met</p>
-<pre class="hljs"><code><div>node http.js
-</div></code></pre>
-<p>Merk op dat er een opmerking staat die vermeld:</p>
-<pre class="hljs"><code><div>You have not generated a certificate yet. 
-</div></code></pre>
-<p>Dit lossen we zodra op.</p>
+<p>Start de webserver op met</p>
+<p><code>node http.js</code></p>
 </li>
 <li>
 <p>Open je browser (liefst chrome) op de adressen die in de terminal zijn gegeven.</p>
 <p>Op http://localhost:3000 zal je een website te zien krijgen die twee links bevat: &quot;Form with GET&quot; en &quot;Form with POST&quot;.</p>
-<p>Op https://localhost:3001 krijg je een foutboodschap te zien:</p>
- <img src="http_error_1.png" width="400">
-<p>Dit komt omdat we nog geen certificaat hebben aangemaakt voor onze webserver.</p>
+<p>Op https://localhost:3001 krijg je de beveiligde versie van deze website te zien. Als je het labo vorige keer correct hebt uitgevoerd krijg je hier geen errors of warnings meer.</p>
 </li>
 <li>
 <p>Sluit de webserver terug af door CTRL-C te drukken in je terminal venster.</p>
 </li>
 <li>
-<p>Om de webserver correct te laten opstarten moeten we met openssl een self signed certificaat maken. Normaal gezien worden certificaten afgeleverd door een certificate authority. Dit is is een organisatie die digitale certificaten aan personen of bedrijven verleent na hun identiteit gecontroleerd te hebben. Dit kost meestal geld dus we gaan natuurlijk in deze cursus dit niet doen. Wij gaan gewoon zelf ons eigen certificaat signen en daar mee werken.</p>
+<p>Installeer wireshark:
+https://www.wireshark.org/. Als er gevraagd wordt of je ncap adapter wil installeren doe dit ook anders kan je niet naar je localhost capturen.</p>
+ <iframe src="https://ap.cloud.panopto.eu/Panopto/Pages/Embed.aspx?id=1194de02-db5b-4971-94ea-ab8501537469&autoplay=false&offerviewer=true&showtitle=true&showbrand=false&start=0&interactivity=all" width=420 height=236 style="border: 1px solid #464646;" allowfullscreen allow="autoplay"></iframe>
+ <iframe src="https://ap.cloud.panopto.eu/Panopto/Pages/Embed.aspx?id=e6a5cca4-f1ea-4b3c-b98b-ab850151ffa4&autoplay=false&offerviewer=true&showtitle=true&showbrand=false&start=0&interactivity=all" width=420 height=236 style="border: 1px solid #464646;" allowfullscreen allow="autoplay"></iframe>
 </li>
 <li>
-<p>Voer in dezelfde directory als hiervoor het volgende commando uit:</p>
-<pre class="hljs"><code><div>openssl genrsa -out key.pem 4096
-
-openssl req -new -sha256 -out private.csr -key key.pem -config ssl.conf 
-
-openssl x509 -req -days 3650 -in private.csr -signkey key.pem -out cert.pem -extensions req_ext -extfile ssl.conf
-</div></code></pre>
-<p>Je krijgt hier een aantal vragen met informatie die in het certificaat zullen opgeslagen worden ter identificatie:</p>
-<pre class="hljs"><code><div>Country Name (2 letter code) []:BE
-State or Province Name (full name) []:Antwerpen
-Locality Name (eg, city) []:Antwerpen
-Organization Name (eg, company) []:AP
-Organizational Unit Name (eg, section) []:Software Security
-Common Name (eg, fully qualified host name) []:localhost
-</div></code></pre>
-<p>Dit zal twee bestanden aanmaken key.pem en cert.pem. Het eerste bestand is je private sleutel waarmee je je certificaat mee gesigned hebt. En het tweede bestand is het certificaat zelf.</p>
-<p><strong>Merk op:</strong> Als je het bestand key.pem opendoet merk je op dat dit heel hard trekt op de private sleutel uit het vorige labo over encryptie.</p>
+<p>Als alles geïnstalleerd is start je wireshark op. Bekijk eerst het filmpje over filteren in wireshark:</p>
+<iframe src="https://ap.cloud.panopto.eu/Panopto/Pages/Embed.aspx?id=50f56683-e4e5-43d5-8bff-ab870155f73f&autoplay=false&offerviewer=true&showtitle=true&showbrand=false&start=0&interactivity=all" width=420 height=236 style="border: 1px solid #464646;" allowfullscreen allow="autoplay"></iframe>
 </li>
 <li>
-<p>Je kan de inhoud van een certificaat op de volgende manier in textvorm bekijken:</p>
-<pre class="hljs"><code><div>openssl x509 -in cert.pem -text
-</div></code></pre>
-<p>Neem een screenshot zodat de <code>Subject</code> uit de output duidelijk zichtbaar is en sleep deze hieronder in:</p>
- <div id="holder2" style="" class="holder_default">
-       <img src="" id="holder2_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
- </div>
- <script>
-     $(document).ready(function() {
-         addDrop('holder2')
-     });
- </script>
+<p>Dubbelklik op de loopback interface:</p>
+<img src="loopback.png" width="400">
+<p>In windows heet dit &quot;Adapter for loopback traffic capture&quot; (of iets gelijkaardig)</p>
+<img src="loopback_windows.png" width="400">
+<p>De loopback interface is een &quot;virtuele netwerkkaart&quot;. Omdat onze webserver enkel lokaal draait op localhost, gaan we deze interface moeten gebruiken om paketten te onderscheppen tussen onze browser en de webserver.</p>
 </li>
 <li>
-<p>Als je nu de webserver terug opstart met <code>node http.js</code> dan zal je niet meer dezelfde fout krijgen bij het opstarten.</p>
+<p>Wireshark maakt het mogelijk om alle netwerk paketten individueel op te vangen en lezen. Vanaf je de loopback interface hebt gekozen zal je direct zien dat er paketten in de lijst komen te staan.</p>
 </li>
 <li>
-<p>Als je nu naar https://localhost:3001 gaat dan krijg je de volgende boodschap te zien:</p>
- <img src="http_warning_1.png" width="400">
-<p>Klik op Advanced (Geavanceerd) en dan krijg klapt het open en dan klik je op &quot;Proceed to localhost(unsafe)&quot;</p>
- <img src="http_warning_2.png" width="400">
-<p>dan krijg je gewoon de website te zien zoals bij de http versie.</p>
-<p><strong>Opgelet</strong>: als je niet de optie krijgt om verder te gaan. Typ dan <code>chrome://flags/#allow-insecure-localhost</code> in je browser en zet deze op Enabled.</p>
+<p>Zorg ervoor dat je enkel de paketten te zien krijgt op poort 3000 door in de balk bovenaan: <code>tcp.port == 3000</code> in te typen.</p>
+<img src="port3000.png" width="400">
 </li>
 <li>
-<p>Waarom waarschuwt je browser je hier over? Waarom is dit onveilig?</p>
- <textarea style="width: 100%;" rows="5">
- </textarea>
+<p>Ga naar http://localhost:3000/get en probeer met een login en paswoord in te loggen (willekeurig)</p>
 </li>
 <li>
-<p>Laat zien dat deze verbinding niet secure is aan de hand van de adresbalk.</p>
-<p>Neem hier een screenshot van en sleep deze hieronder in:</p>
- <div id="holder1" style="" class="holder_default">
-       <img src="" id="holder1_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
- </div>
- <script>
-     $(document).ready(function() {
-         addDrop('holder1')
-     });
- </script>    
+<p>Zoek het pakket voor deze GET en zoek achter het paswoord dat je hebt ingegeven. Deze paketten zullen niet altijd direct te vinden zijn, dus wat speurwerk kan nodig zijn.</p>
+<p>Je kan ook zoeken achter paketten door Find Packet te doen (ctrl-f).</p>
+<img src="search.png" width="400">
 </li>
 <li>
-<p>Bepaal de SSL/TLS capabilities van jouw browser aan de hand van de website</p>
-<p><a href="https://clienttest.ssllabs.com/">https://clienttest.ssllabs.com/</a></p>
-<p>Voor welke versie(s) van SSL/TLS heeft jouw browser support?</p>
-<textarea style="width: 100%;" rows="3">
+<p>Maak een screenshot van het gevonden pakket en sleep deze hier onder in. Zorg ervoor dat het passwoord en login zichtbaar is.</p>
+<div id="holder" style="" class="holder_default">
+      <img src="" id="holder_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+</div>
+<script>
+    $(document).ready(function() {
+        addDrop('holder')
+    });
+</script>
+</li>
+<li>
+<p>Waarom kon je dit paswoord gewoon clear text zien?</p>
+<textarea style="width: 100%;" rows="2">
 </textarea>
-<p>Waarom zijn lagere versies niet meer supported?</p>
+</li>
+<li>
+<p>Verander nu de filter in de balk bovenaan zodat je de ssl handshake kan zien.</p>
+</li>
+<li>
+<p>Ga nu naar https://localhost:3001 en kijk nu een wireshark dat je de paketten te zien krijgt. Neem een screenshot waar duidelijk het <code>Client Hello</code> en het <code>Server Hello</code> pakket op te zien is (gebruik een pijl).</p>
+<p>Sleep deze screenshot hier onder in:</p>
+<div id="holder2" style="" class="holder_default">
+      <img src="" id="holder2_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+</div>
+<script>
+    $(document).ready(function() {
+        addDrop('holder2')
+    });
+</script>
+</li>
+<li>
+<p>Open een <code>Client Hello</code> pakket door er op te dubbelklikken. Zoek het <code>transport layer security</code> deel van het paket en klap dat open.</p>
+<p>Welke Cipher Suites worden ondersteunt door je browser volgens deze Client Hello?</p>
+<textarea style="width: 100%;" rows="15">
+</textarea>
+<p><strong>Tip:</strong> Je kan dit kopieren door rechter muisknop te klikken en dan Copy all selected tree items te kiezen.</p>
+<p>Wat wordt er bedoeld met deze Cipher Suites en waarom stuurt onze browser deze door met het <code>Client Hello</code> bericht:</p>
+<textarea style="width: 100%;" rows="5">
+</textarea>
+<p>Welke versies van TLS ondersteunt je browser (zoek naar Extension: supported_version)</p>
 <textarea style="width: 100%;" rows="5">
 </textarea>
 </li>
 <li>
-<p>Open een tweede terminal venster terwijl je webserver nog opstaat. En run het volgende commando:</p>
-<pre class="hljs"><code><div>openssl s_client -connect localhost:3001
-</div></code></pre>
-</li>
-<li>
-<p>Welk TLS protocol ondersteunt onze eigen gemaakte server? (Zie naar de output van vorig commando)</p>
+<p>Open nu een <code>Server Hello</code> pakket door er op te dubbelklikken. Zoek het <code>transport layer security</code> deel van het paket en klap dat open.</p>
+<p>Welke Cipher Suite heeft de server gekozen:</p>
 <textarea style="width: 100%;" rows="2">
 </textarea>
 </li>
 <li>
-<p>Verlaag nu de versie van TLS van onze web server naar TLS 1.0.</p>
-<p>Dit kan gedaan worden door de lijn:</p>
-<pre class="hljs"><code><div>secureProtocol  : 'TLS_method',
-</div></code></pre>
-<p>te vervangen met:</p>
-<pre class="hljs"><code><div>secureProtocol  : 'TLSv1_method',
-</div></code></pre>
-<p>te veranderen in <code>http.js</code>. Start daarna de web server terug op.</p>
+<p>Verander nu de filter in de balk bovenaan naar: <code>tcp.port == 3001</code></p>
 </li>
 <li>
-<p>Ga naar terug naar de https website en open de chrome developer tools (CTRL-SHIFT-J) en ga vervolgens naar de security tab. Hier kan je allerlei informatie over de security zien van deze pagina.</p>
-<p>Ondersteunt jouw browser deze versie van TLS?</p>
-<textarea style="width: 100%;" rows="2">
-</textarea>
-<p>Vanaf welke versie dan wel?</p>
-<textarea style="width: 100%;" rows="2">
+<p>Ga nu naar https://localhost:3001/get en probeer in te loggen met eender welk login en passwoord.</p>
+</li>
+<li>
+<p>Als je nu gaat zoeken in de paketten die hij gesniffed heeft zal je opmerken dat je deze niet meer vind. Waarom is dit?</p>
+<textarea style="width: 100%;" rows="5">
 </textarea>
 </li>
 <li>
-<p>Je kan nu testen of de server specifiek een versie van TLS ondersteunt met het volgende commando:</p>
-<pre class="hljs"><code><div>openssl s_client -connect localhost:3001 -tls1_3
-</div></code></pre>
-<p>Neem een screenshot waar de output duidelijk te zien is en sleep deze hieronder in:</p>
-<div id="holder4" style="" class="holder_default">
-      <img src="" id="holder4_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
-</div>
-<script>
-    $(document).ready(function() {
-        addDrop('holder4')
-    });
-</script>
+<p>Jouw browser en de server spreken normaal gezien altijd de meest veilige cipher suite (encryptie algoritme) af tijdens de handshake. We gaan nu bewust een zwakkere kiezen, zodat we deze toch kunnen uitlezen via wireshark.</p>
 </li>
 <li>
-<p>Zet nu de versie van TLS op 1.2 in de <strong>http.js</strong> file (TLSv1_2_method)</p>
-<p>Herstart de server en herlaad de pagina en neem nu een screenshot van de chrome developer tools (security tab) en sleep deze hier onder in:</p>
-<div id="holder5" style="" class="holder_default">
-      <img src="" id="holder5_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
-</div>
-<script>
-    $(document).ready(function() {
-        addDrop('holder5')
-    });
-</script>
+<p>Pas de options aan in http.js zodat ze deze properties bevat:</p>
+<pre><code>```
+ciphers: 'TLS_RSA_WITH_AES_256_CBC_SHA',
+secureProtocol  : 'TLSv1_method',
+```
+</code></pre>
+<p>Als je nog herinnert, volgens de website van ssllabs.com stond TLS_RSA_WITH_AES_256_CBC_SHA gemarkeerd als WEAK:</p>
+<img src="weak.png" width="400">
+<p>Het ideale voorbeeld dus!</p>
 </li>
 <li>
-<p>Zorg ervoor dat het het certificaat in je trusted root certfication authorities van je operating system komt te staan.</p>
-<p>Windows:</p>
+<p>Herstart de http server.</p>
+</li>
+<li>
+<p>Ga terug naar wireshark en ga naar preferences (in Edit). Of druk CTRL-SHIFT-P</p>
+</li>
+<li>
+<p>Ga naar Protocols en daarna TLS. Vervolgens ga je naar <code>RSA keys list</code> en druk je op Edit.</p>
+<img src="rsakeylist.png" width="400">
+<p>en dan druk je op het + knopje.</p>
+</li>
+<li>
+<p>Daar vul je de volgende waarden in:</p>
 <ul>
-<li>Open de Microsoft Management Console (Windows key-R en dan mmc intypen)</li>
-<li>Add remove snap-in</li>
-<li>Voeg de certificate snap-in toe</li>
-<li>Kies computer account (Next)</li>
-<li>Klik op finish</li>
-<li>Ga naar Trusted Root Certification Authorities/Certificates</li>
-<li>Klik op Actions -&gt; All Tasks -&gt; Import</li>
-<li>Importeer jouw cert.pem (altijd next klikken)</li>
+<li>IP Address: 0.0.0.0</li>
+<li>Port: 0</li>
+<li>Protocol: http</li>
+<li>Key File: <em>de locatie van je key.pem bestand</em></li>
 </ul>
-<p>Mac Os:</p>
-<ul>
-<li>Dubbelklik op het <code>cert.pem</code> bestand</li>
-<li>Kies keychain 'system'</li>
-<li>Dubbelklik op 'localhost' die net is toegevoegd</li>
-<li>Kijk zeker na of het jouw certificaat is!</li>
-<li>Klik op trust en kies Always Trust bij SSL</li>
-</ul>
-<p>Sluit chrome volledig (Chrome menu--&gt;Exit, niet enkel kruisje) en ga terug naar</p>
-<pre class="hljs"><code><div>https://localhost:3001
-</div></code></pre>
-<p>en neem een screenshot van je browser die aantoont dat er een slotje staat in de adresbalk:</p>
+<img src="tls_decrypt.png" width="400">
+</li>
+<li>
+<p>Als je nu surft naar https://localhost:3001 en je logt in dan zal je terug in wireshark de paketten kunnen lezen. Dit is omdat de cipher suite die je gebruikt niet veilig is. Als iemand in bezit is van de private sleutel, kan die dus toch alles uitlezen.</p>
+<img src="usesafeciphersuites.png" width="400">
+</li>
+<li>
+<p>Maak een screenshot waarmee je bewijst dat je nu terug je login en paswoord kan zien in wireshark als je inlogt in sleep deze hieronder in:</p>
 <div id="holder3" style="" class="holder_default">
       <img src="" id="holder3_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
 </div>
@@ -601,12 +570,15 @@ Common Name (eg, fully qualified host name) []:localhost
 </script>
 </li>
 <li>
-<p>Print deze pagina af als PDF en slaag deze op als <code>naam_voornaam_labo_https_ssl.pdf</code></p>
-<p>Zip alle bestanden die je in dit labo hebt aangemaakt en stuur deze in via digitap. Deze bestanden zijn:</p>
-<ul>
-<li>naam_voornaam_labo_https_ssl.pdf</li>
-<li>http.js</li>
-</ul>
+<p>Als je nu terug een sterkere cipher suite kiest en de TSL versie terug verhoogt naar 1.3 met</p>
+<pre class="hljs"><code><div>    ciphers: 'TLS_AES_256_GCM_SHA384',
+    secureProtocol  : 'TLS_method',
+</div></code></pre>
+<p>dan zal je zien dat je de berichten zelfs niet meer kan lezen met de private key.</p>
+</li>
+<li>
+<p>Print deze pagina af als PDF en slaag deze op als <code>naam_voornaam_labo_https_ssl.pdf</code>.</p>
+<p>Stuur deze vervolgens in via digitap!</p>
 </li>
 </ol>
 <script>

@@ -181,7 +181,7 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
     <textarea style="width: 100%;" rows="2">
     </textarea>
 
-15. Verlaag nu de versie van TLS van onze web server naar TLS 1.1.
+15. Verlaag nu de versie van TLS van onze web server naar TLS 1.0.
 
     Dit kan gedaan worden door de lijn: 
 
@@ -195,7 +195,7 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
     secureProtocol  : 'TLSv1_method',
     ```
 
-    te veranderen in `http.js`
+    te veranderen in `http.js`. Start daarna de web server terug op.
 
 16. Ga naar terug naar de https website en open de chrome developer tools (CTRL-SHIFT-J) en ga vervolgens naar de security tab. Hier kan je allerlei informatie over de security zien van deze pagina.
 
@@ -228,6 +228,17 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
 
 17. Zet nu de versie van TLS op 1.2 in de **http.js** file (TLSv1_2_method)
 
+    Herstart de server en herlaad de pagina en neem nu een screenshot van de chrome developer tools (security tab) en sleep deze hier onder in:
+
+    <div id="holder5" style="" class="holder_default">
+          <img src="" id="holder5_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+    </div>
+    <script>
+        $(document).ready(function() {
+            addDrop('holder5')
+        });
+    </script>
+
 16. Zorg ervoor dat het het certificaat in je trusted root certfication authorities van je operating system komt te staan.
 
     Windows: 
@@ -248,8 +259,8 @@ GEBRUIK NIET DIT BESTAND OM HET LABO TE MAKEN MAAR GEBRUIK DE LINK OP DIGITAP!
     - Dubbelklik op 'localhost' die net is toegevoegd
     - Kijk zeker na of het jouw certificaat is!
     - Klik op trust en kies Always Trust bij SSL
-    
-    Sluit chrome volledig en ga terug naar
+
+    Sluit chrome volledig (Chrome menu-->Exit, niet enkel kruisje) en ga terug naar
 
     ```
     https://localhost:3001
