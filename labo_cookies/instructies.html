@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>instructies.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<style>
+.holder_default {
+    width:500px; 
+    height:150px; 
+    border: 3px dashed #ccc;
+}
+
+.hover { 
+    width:400px; 
+    height:150px; 
+    border: 3px dashed #0c0 !important; 
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+</style>
+<script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<div id="alles">
+<h1 id="cookies">Cookies</h1>
+<p>Zoals altijd kunnen de oefeningen binnengehaald worden door een git pull te doen.</p>
+<pre class="hljs"><code><div>git pull
+</div></code></pre>
+<p>of de git repository te clonen als je deze nog niet hebt.</p>
+<pre class="hljs"><code><div>git clone https://bitbucket.org/similon-ap/software_security_pro.git
+</div></code></pre>
+<h3 id="wat-ga-je-leren-in-dit-labo">Wat ga je leren in dit labo?</h3>
+<ul>
+<li>Leren met cookies werken met chrome developer tools.</li>
+<li>De verschillende options mogelijk bij cookies begrijpen.</li>
+<li>Wireshark gebruiken om cookies te onderscheppen.</li>
+</ul>
+<h3 id="stappenplan">Stappenplan</h3>
+<ol start="0">
+<li>
+<p>We raden je aan om google chrome te gebruiken voor dit labo. Wens je dat niet te doen zal je voor sommige settings zelf op zoek moeten gaan.</p>
+</li>
+<li>
+<p>Open de terminal in <code>labo_cookies/exercise1</code> via visual studio code en installeer alle npm dependencies met</p>
+<pre class="hljs"><code><div>npm install
+</div></code></pre>
+</li>
+<li>
+<p>We hebben voor deze oefening net als vorig labo een webserver in node js geschreven. Je kan deze opstarten met</p>
+<pre class="hljs"><code><div>node http.js
+</div></code></pre>
+<p>Het certificaat voor deze server is al aangemaakt in deze sessie.</p>
+</li>
+<li>
+<p>Open je browser op het volgende adres:</p>
+<p><code>http://localhost:3000/show_cookies</code></p>
+<p>Je zal daar de melding: 'No cookies... I'm hungry!' krijgen.</p>
+<p>De show_cookies pagina zal via javascript code de cookies uitlezen en op je scherm laten zien.</p>
+</li>
+<li>
+<p>Ga daarna naar het adres:</p>
+<p><code>http://localhost:3000/set_cookies</code></p>
+<p>daar krijg je de melding: 'Cookies set!'. Op dit moment heeft de webserver een aantal cookies gezet. Als je daarna terug naar de show_cookies pagina gaat dan krijg je er een aantal te zien.</p>
+<p><em>Neem screenshot en sleep bestand in het vak hieronder:</em></p>
+ <div id="holder" style="" class="holder_default">
+       <img src="" id="holder_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+ </div>
+ <script>
+     $(document).ready(function() {
+         addDrop('holder')
+     });
+ </script>
+</li>
+<li>
+<p>Open de chrome developer tools via <code>Ctrl + Shift + I</code> (Windows) of <code>Cmd + Opt + I</code> (MacOS) en ga dan vervolgens naar het tabblad Application</p>
+ <img src="application.png" width="400">
+<p>vervolgens ga je naar Cookies en klik je op <code>http://localhost:3000</code></p>
+ <img src="cookies.png" width="150">
+<p>Je krijgt dan een lijst van cookies te zien.</p>
+<p><strong>Opmerking</strong>: als je voor een reden in dit labo terug opnieuw wil beginnen kan je altijd rechter muisklikken en de cookies clearen. Vervolgens ga je terug naar <code>http://localhost:3000/set_cookies</code> om ze terug te zetten.</p>
+ <img src="clear_cookies.png" width="150">
+<p><strong>Opmerking 2</strong>: Negeer tot nader order de cookie <em>connect.sid</em>. Deze komt later aan bod.</p>
+</li>
+<li>
+<p>Tot wanneer blijft cookie_1 geldig?</p>
+ <textarea style="width: 100%">
+ </textarea>
+<p>In een cookie wordt dit het <code>expires</code> veld genoemd. De waarde van dit veld is een datum met tijdstip in string vorm.</p>
+</li>
+<li>
+<p>cookie_2 zal snel vervallen. Indien je het niet ziet in de chrome developer tools. Ga dan nog eens naar <code>http://localhost:3000/set_cookies</code> en dan terug naar <code>http://localhost:3000/show_cookies</code>. Binnen de 3 minuten zal cookie_2 altijd vervallen.</p>
+<p>In een cookie wordt dit het <code>maxAge</code> veld genoemd. De waarde van dit veld is het aantal milliseconden dat deze cookie zal blijven leven na het zetten ervan.</p>
+</li>
+<li>
+<p>Hoeveel milliseconden zal een maxAge van 3 minuten zijn?</p>
+ <textarea style="width: 100%">
+     </textarea>
+</li>
+<li>
+<p>Het <code>HttpOnly</code> veld op cookie_3 zorgt ervoor dat een cookie niet kan uitgelezen kan worden via javascript. Dit maakt het veilig zodat kwaadaardige scripts het niet kunnen uitlezen.</p>
+<p>Maar hier een screenshot van en laat zeker zien dat je het HttpOnly vlag hebt gevonden. <em>Sleep het bestand in het vak hieronder:</em></p>
+ <div id="httponly" class="holder_default">
+       <img src="" id="httponly_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+ </div>
+ <script>
+     $(document).ready(function() {
+         addDrop('httponly')
+     });
+ </script>
+</li>
+<li>
+<p>Ga nu naar
+<code>https://localhost:3001/set_cookies</code></p>
+<p>en dan weer naar naar</p>
+<p><code>https://localhost:3001/show_cookies</code></p>
+<p>merk daar op dat er een nieuwe cookie is bijgekomen. Dit is omdat daarvoor deze cookie <code>secure=true</code> heeft staan.</p>
+</li>
+<li>
+<p>Wat is de waarde van <code>cookie_4</code>:</p>
+<textarea style="width: 100%">
+</textarea>
+<p>Waarom is de cookie nu pas zichtbaar?</p>
+<textarea style="width: 100%">
+</textarea>
+</li>
+<li>
+<p>Ga nu naar</p>
+<p><code>https://localhost:3001/hide_me/show_cookies</code></p>
+<p>Daar is de laatste cookie <code>cookie_5</code> te vinden. Dit is omdat cookie_5 het veld <code>path</code> op '/hide_me' heeft gezet. Dit betekent dat de url 'hide_me' op zijn pad moet hebben (en alles daar onder)</p>
+</li>
+<li>
+<p>Maak een screenshot van de developer tools waar alle 5 cookies op zichtbaar zijn. <em>Sleep het bestand in het vak hieronder:</em></p>
+<div id="allcookies" style="" class="holder_default">
+      <img src="" id="allcookies_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+</div>
+<script>
+    $(document).ready(function() {
+        addDrop('allcookies')
+    });
+</script>
+</li>
+<li>
+<p>Je kan ook de waarden van de cookies aanpassen in de developer tools door te dubbelklikken op de value van de cookie</p>
+<img src="change_value.png" width="200">
+<p>Pas alle values aan van de cookies naar eender welke waarde en ga terug naar</p>
+<p><code>https://localhost:3001/hide_me/show_cookies</code></p>
+<p><em>Maak hier een screenshot van en sleep het bestand in het vak hieronder:</em></p>
+<div id="allcookies_changed" style="" class="holder_default">
+      <img src="" id="allcookies_changed_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+</div>
+<script>
+    $(document).ready(function() {
+        addDrop('allcookies_changed')
+    });
+</script>
+</li>
+<li>
+<p>Ook de <code>expires</code> en <code>maxAge</code> van een cookie kan aangepast worden. Zorg ervoor dat cookie_1 en cookie_2 niet meer vervallen.</p>
+</li>
+<li>
+<p>Ook het <code>path</code> kan aangepast worden. Zorg ervoor dat alle cookies ook zichtbaar zijn op</p>
+<p><code>https://localhost:3001/show_cookies</code></p>
+</li>
+<li>
+<p>het <code>HttpOnly</code> veld en het <code>secure</code> kan je jammer genoeg niet aanpassen. Maar zelfs daarvoor bestaat een oplossing:</p>
+<p>Klik op het lege gebied onder de cookies om een nieuwe cookie aan te maken. En maak een nieuwe cookie aan met de naam cookie_3 en dezelfde waarden als hiervoor. cookie_3 zal dan overschreven worden en het HttpOnly veld zal verdwenen zijn.</p>
+</li>
+<li>
+<p>Maak een screenshot van de</p>
+<p><code>https://localhost:3001/show_cookies</code></p>
+<p>pagina (niet de developer tools!!).
+<em>Sleep het bestand in het vak hieronder:</em></p>
+<div id="all_cookies_modified" style="" id="holder" class="holder_default">
+      <img src="" id="all_cookies_modified_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+</div>
+<script>
+    $(document).ready(function() {
+        addDrop('all_cookies_modified')
+    });
+</script>
+<p><strong>Alle 5 cookies moeten zichtbaar zijn.</strong></p>
+</li>
+<li>
+<p>Open wireshark op de loopback interface (zie vorig labo) en probeer de cookies te vinden via wireshark. <em>Maak een screenshot en sleep het bestand in het vak hieronder:</em></p>
+<div id="wireshark" style="" id="holder" class="holder_default">
+        <img src="" id="wireshark_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+    </div>
+    <script>
+        $(document).ready(function() {
+            addDrop('wireshark')
+        });
+    </script>
+<p><strong>Tip</strong>: Herinner dat je https paketten niet kan uitlezen.</p>
+</li>
+<li>
+<p>Vooraleer verder te gaan ga eerst naar de pagina</p>
+<p><code>https://localhost:3001</code></p>
+<p>daar zal je <code>Unauthorized</code> terug krijgen omdat je nog moet inloggen.</p>
+</li>
+<li>
+<p>Je kan inloggen door naar</p>
+<p><code>https://localhost:3001/login?username=admin&amp;password=admin</code></p>
+<p>te surfen. Je zal hier <code>login success!</code> te zien krijgen.</p>
+</li>
+<li>
+<p>Ga terug naar
+<code>https://localhost:3001</code></p>
+<p>je zal nu iets anders te zien krijgen dan hiervoor omdat je nu ingelogd bent.</p>
+</li>
+<li>
+<p>Ga nu kijken in de developer tools window en je zult de session id daar terug vinden onder <code>connect.sid</code>. Deze zal overeen komen met de session id op de server en zo weet de server welke gebruiker jij bent.</p>
+<p><em>Maak een screenshot en sleep het bestand in het vak hieronder:</em></p>
+<div id="cookies_session" style="" class="holder_default">
+        <img src="" id="cookies_session_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
+    </div>
+    <script>
+        $(document).ready(function() {
+            addDrop('cookies_session')
+        });
+    </script>
+</li>
+<li>
+<p>Als je nu de value van <code>connect.sid</code> veranderd naar iets anders en dan de webpagina refreshed dan zal je zien dat je weer uitgelogd bent. Waarom?</p>
+<textarea style="width: 100%">
+    </textarea>
+</li>
+<li>
+<p>Print deze pagina af als PDF en zend deze via digitap in.</p>
+<p><strong>Opmerking:</strong> Als dit niet lukt maak dan een zip file en stuur deze door.</p>
+</li>
+</ol>
+<script>
+function addDrop(id) {
+    var holder = document.getElementById(id);
+    holder.ondragover = function () { this.className = 'hover'; return false; };
+    holder.ondrop = function (e) {
+      this.className = 'hidden';
+      e.preventDefault();
+      var file = e.dataTransfer.files[0];
+      var reader = new FileReader();
+      reader.onload = function (event) {
+          document.getElementById(id + '_image_droped').className='visible'
+          $('#' + id + '_image_droped').attr('src', event.target.result);
+      }
+      reader.readAsDataURL(file);
+    };
+}
+</script>
+
+</body>
+</html>

@@ -195,8 +195,6 @@ https://www.wireshark.org/. Als er gevraagd wordt of je ncap adapter wil install
 
 28. Als je nu surft naar https://localhost:3001 en je logt in dan zal je terug in wireshark de paketten kunnen lezen. Dit is omdat de cipher suite die je gebruikt niet veilig is. Als iemand in bezit is van de private sleutel, kan die dus toch alles uitlezen. 
 
-    <img src="usesafeciphersuites.png" width="400">
-
 29. Maak een screenshot waarmee je bewijst dat je nu terug je login en paswoord kan zien in wireshark als je inlogt in sleep deze hieronder in: 
 
     <div id="holder3" style="" class="holder_default">

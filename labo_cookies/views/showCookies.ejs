@@ -1,0 +1,20 @@
+<script>
+    function listCookies() {
+        var theCookies = document.cookie.split(';');
+        var aString = '';
+        for (var i = 1 ; i <= theCookies.length; i++) {
+            if (theCookies[i-1]) {
+                aString += theCookies[i-1] + "<br/>";
+            }
+        }
+        return aString;
+    }
+    
+    var cookies = listCookies();
+    if (cookies) {
+        document.write(listCookies());
+    } else {
+        document.write('No cookies... I\'m hungry!');
+    }
+
+</script>
