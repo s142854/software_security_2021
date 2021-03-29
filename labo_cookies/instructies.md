@@ -45,7 +45,7 @@ git pull
 of de git repository te clonen als je deze nog niet hebt.
 
 ```
-git clone https://bitbucket.org/similon-ap/software_security_pro.git
+git clone https://github.com/similonap/software_security_2021.git
 ```
 
 ### Wat ga je leren in dit labo?
@@ -270,10 +270,9 @@ git clone https://bitbucket.org/similon-ap/software_security_pro.git
     <textarea style="width: 100%">
         </textarea>
 
-23. Print deze pagina af als PDF en zend deze via digitap in.
+23. Print deze pagina af als PDF en slaag deze op als `naam_voornaam_labo_cookies.pdf`.
 
-    **Opmerking:** Als dit niet lukt maak dan een zip file en stuur deze door.
-
+    Stuur deze vervolgens in via digitap!
 
 <script>
 function addDrop(id) {
