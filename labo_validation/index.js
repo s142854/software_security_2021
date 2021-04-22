@@ -92,7 +92,7 @@ app.post('/buy-ticket', (req, res) => {
   //    res.send('Server validation failed');
   // }
 
-  db.run(`INSERT INTO Ticket VALUES ('${name}', '${country}', ${tickets})`, (err) => {
+  db.exec(`INSERT INTO Ticket VALUES ('${name}', '${country}', ${tickets})`, (err) => {
     if (err) {
       res.render('buyTicket', { error: err.toString() });
     } else {
@@ -111,7 +111,9 @@ app.get('/show-tickets', (req, res) => {
   }
   let name = req.query.name ? req.query.name : '';
 
-  db.all(`select * from Ticket where name LIKE '%${name}%'`, (err, rows) => {
+  
+  console.log(`select name, country, tickets from Ticket where name LIKE '%${name}%'`);
+  db.all(`select name, country, tickets from Ticket where name LIKE ?`, '%' + name + '%', (err, rows) => {
     if (err) {
       res.render('showtickets', { error: err.toString() });
     } else {
