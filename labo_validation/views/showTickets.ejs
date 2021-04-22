@@ -1,0 +1,29 @@
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+
+<form name="ticket" method="GET" action="/show-tickets">
+    <input type="text" id="name" name="name">
+    <input type="submit" value="Zoeken">
+</form>
+
+<% if (locals.error) { %>
+    <b style="color: white; background-color: red;"><%- error %></b>
+<% } %>
+
+<% if (locals.tickets) { %>
+        <table width="640">
+        <% tickets.map((ticket) => { %>
+            <tr>
+                <td><%- ticket.name %></td>
+                <td><%- ticket.country %></td>
+                <td><%- ticket.tickets %></td>
+            </tr>
+        <% }) %>
+        </table>
+<% } %>
+
+<a href="/logout">Logout</a> <a href="/cleardb">Clear Database</a> <a href="/buy-ticket">Buy Ticket</a>

@@ -1,0 +1,31 @@
+<style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+</style>
+<body onload="setCaptcha()">
+<% if (locals.error) { %>
+    <b style="color: white; background-color: red;"><%- error %></b>
+<% } %>
+<form method="post" action="/">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+      <br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <br>
+      <label for="captchaSource">Solve this puzzle:</label>
+      <input style="width: 40px" type="text" id="captchaSource" name="captchaSource"  readonly="readonly"> = <input required style="width: 40px" type="number" name="captchaSolution" id="captchaSolution">
+      <br>
+      <input type="submit" value="Login">
+</form>
+
+<script>
+    const setCaptcha = () => {
+        let num1 = Math.floor(Math.random() * 5) + 1;
+        let num2 = Math.floor(Math.random() * 5) + 1;
+        document.getElementById("captchaSource").value = `${num1}+${num2}`;
+    }
+    </script>
+</body>
