@@ -90,6 +90,7 @@ app.post('/buy-ticket', (req, res) => {
   // TODO: Add server side validation.
   // if (a !== b) {
   //    res.send('Server validation failed');
+  //    return;
   // }
 
   db.exec(`INSERT INTO Ticket VALUES ('${name}', '${country}', ${tickets})`, (err) => {
@@ -113,7 +114,7 @@ app.get('/show-tickets', (req, res) => {
 
   
   console.log(`select name, country, tickets from Ticket where name LIKE '%${name}%'`);
-  db.all(`select name, country, tickets from Ticket where name LIKE ?`, '%' + name + '%', (err, rows) => {
+  db.all(`select name, country, tickets from Ticket where name LIKE '%${name}%'`, (err, rows) => {
     if (err) {
       res.render('showtickets', { error: err.toString() });
     } else {
