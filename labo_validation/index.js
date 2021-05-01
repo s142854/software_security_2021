@@ -92,7 +92,7 @@ app.post('/buy-ticket', (req, res) => {
   //    res.send('Server validation failed');
   //    return;
   // }
-
+  console.log(`INSERT INTO Ticket VALUES ('${name}', '${country}', ${tickets})`);
   db.exec(`INSERT INTO Ticket VALUES ('${name}', '${country}', ${tickets})`, (err) => {
     if (err) {
       res.render('buyTicket', { error: err.toString() });
