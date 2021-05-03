@@ -1,0 +1,16 @@
+You have <%= money %> coins.
+
+<br><br>
+<b>Send coins to:</b>
+<form method="POST" action="sendMoney" autocomplete="off">
+    <label for="to"><b>To</b></label>
+    <select id="to" name="to">
+        <% for (let i=0;i<users.length;i++) { %>
+            <option value="<%= users[i].username %>"><%= users[i].username %></option>
+        <% } %>   
+    </select>
+    <input type="number" name="money" max="<%= money %>" value="<%= money %>">
+    <input type="submit">
+</form>
+
+<a href="/logout">Logout</a>
