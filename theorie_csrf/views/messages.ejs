@@ -1,0 +1,11 @@
+<table border="1" width="640">
+<tr>
+    <th>From</th>
+    <th>Message</th>
+</tr>
+<% for (let i=0;i<messages.length;i++) { %>
+    <tr><td><%- messages[i].from.username %></td><td><div id="message_<%- i %>"><%- messages[i].message %></div></td></tr>
+<% } %>
+</table>
+
+<a href="/main">Go back</a>
