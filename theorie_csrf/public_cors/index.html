@@ -1,0 +1,11 @@
+<script>
+    const callApi = async() => {
+        const response = await fetch("http://localhost:3000/users/json");
+        const json = await response.json();
+        console.log(json);
+    }
+
+
+    callApi();
+
+</script>

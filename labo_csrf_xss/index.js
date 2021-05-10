@@ -1,7 +1,6 @@
 const express = require('express')
 const session = require('express-session')
 const fs = require('fs')
-const cors = require('cors');
 const app = express()
 const port = 3000
 
@@ -34,7 +33,6 @@ app.use(express.static('public'))
 app.use(session({ secret: SESSION_SECRET, cookie: {httpOnly: false} }))
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors({origin: "http://localhost:3002"}));
 app.set('view engine', 'ejs');
 
 app.use((req, res, next) => {
@@ -84,10 +82,6 @@ app.get('/messages', (req, res) => {
     } else {
         res.send('You are not logged in');
     }
-});
-
-app.get('/users/json', (req, res) => {
-    res.json(users);
 });
 
 app.get('/logout', (req, res) => {

