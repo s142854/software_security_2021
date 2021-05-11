@@ -66,7 +66,7 @@ app.post('/', (req, res) => {
 app.get('/main', (req, res) => {
     if (res.locals.user) {
         let user = users.find(user => user.username === req.session.user.username);
-        let myMessages = messages.filter(message => message.to.username === res.locals.user.username) ?? [];
+        let myMessages = messages.filter(message => message.to.username === res.locals.user.username) || [];
         console.log(user);
         res.render('main', { user: user, money: user.money, users: users, messages: myMessages});
     } else {
@@ -76,7 +76,7 @@ app.get('/main', (req, res) => {
 
 app.get('/messages', (req, res) => {
     if (res.locals.user) {
-        let myMessages = messages.filter(message => message.to.username === res.locals.user.username) ?? [];
+        let myMessages = messages.filter(message => message.to.username === res.locals.user.username) || [];
 
         res.render('messages', { messages: myMessages});
     } else {
@@ -103,7 +103,7 @@ app.post('/sendMessage', (req,res) => {
     }]
 
     let user = users.find(user => user.username === req.session.user.username);
-    let myMessages = messages.filter(message => message.to.username === res.locals.user.username) ?? [];
+    let myMessages = messages.filter(message => message.to.username === res.locals.user.username) || [];
     res.render('main', { user: user, money: user.money, users: users, messages: myMessages});
 
 })
@@ -121,7 +121,7 @@ app.post('/sendMoney', (req, res) => {
         
 
         let user = users.find(user => user.username === req.session.user.username);
-        let myMessages = messages.filter(message => message.to.username === res.locals.user.username) ?? [];
+        let myMessages = messages.filter(message => message.to.username === res.locals.user.username) || [];
 
         res.render('main', { user: user, money: user.money, users: users, messages: myMessages});
     } else {
