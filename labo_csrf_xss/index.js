@@ -87,7 +87,11 @@ app.get('/messages', (req, res) => {
 app.get('/logout', (req, res) => {
     req.session.user = null;
     res.render('login');
-  });
+});
+
+app.get('/users/json', (req, res) => {
+    res.json(users);
+});
 
 app.post('/sendMessage', (req,res) => {
     let to = req.body.to;
