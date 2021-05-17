@@ -4,7 +4,7 @@
     <th>Message</th>
 </tr>
 <% for (let i=0;i<messages.length;i++) { %>
-    <tr><td><%= messages[i].from.username %></td><td><div id="message_<%- i %>"><%= messages[i].message %></div></td></tr>
+    <tr><td><%- messages[i].from.username %></td><td><div id="message_<%- i %>"><%- messages[i].message %></div></td></tr>
 <% } %>
 </table>
 
