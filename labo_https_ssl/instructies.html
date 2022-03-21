@@ -555,16 +555,7 @@ Common Name (eg, fully qualified host name) []:localhost
 </script>
 </li>
 <li>
-<p>Zet nu de versie van TLS op 1.2 in de <strong>http.js</strong> file (TLSv1_2_method)</p>
-<p>Herstart de server en herlaad de pagina en neem nu een screenshot van de chrome developer tools (security tab) en sleep deze hier onder in:</p>
-<div id="holder5" style="" class="holder_default">
-      <img src="" id="holder5_image_droped"  style="max-width:80%; border: 3px dashed #7A97FC;" class=" hidden"/>
-</div>
-<script>
-    $(document).ready(function() {
-        addDrop('holder5')
-    });
-</script>
+<p>Zet nu de versie van TLS op 1.2 in de <strong>http.js</strong> file (TLSv1_2_method) en ciphers op TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (of deze key helemaal verwijderen).</p>
 </li>
 <li>
 <p>Zorg ervoor dat het het certificaat in je trusted root certfication authorities van je operating system komt te staan.</p>
