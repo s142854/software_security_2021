@@ -13,7 +13,6 @@ app.set('view engine', 'ejs');
 let options = null;
 try {
     options = {
-        ciphers: 'TLS_AES_256_GCM_SHA384',
         secureProtocol  : 'TLS_method',
         key: fs.readFileSync('key.pem'),
         cert: fs.readFileSync('cert.pem'),
