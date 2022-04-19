@@ -37,7 +37,7 @@ app.get('/hide_me/show_cookies', (req, res) => {
 app.get('/set_cookies', (req, res) => {
     res.cookie('cookie_1', 'delicious', {
         path: '/',
-        expires: new Date('2022-01-01T10:00:00.000Z'),
+        expires: new Date('2023-01-01T10:00:00.000Z'),
         httpOnly: false,
         secure: false
     });
