@@ -140,25 +140,6 @@ git clone https://github.com/similonap/software_security_2021.git
         });
     </script>
 
-10. Ga nu naar 
-    ```https://localhost:3001/set_cookies```
-
-    en dan weer naar naar 
-
-    ```https://localhost:3001/show_cookies```
-
-    merk daar op dat er een nieuwe cookie is bijgekomen. Dit is omdat daarvoor deze cookie ```secure=true``` heeft staan.
-
-11. Wat is de waarde van ```cookie_4```:
-
-    <textarea style="width: 100%">
-    </textarea>
-
-    Waarom is de cookie nu pas zichtbaar?
-
-    <textarea style="width: 100%">
-    </textarea>
-
 12. Ga nu naar 
 
     ```https://localhost:3001/hide_me/show_cookies```
