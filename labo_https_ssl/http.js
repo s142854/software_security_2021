@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 let options = null;
 try {
     options = {
-        secureProtocol  : 'TLS_method',
+        secureProtocol  : 'TLSv1_method',
         key: fs.readFileSync('key.pem'),
         cert: fs.readFileSync('cert.pem'),
     };
